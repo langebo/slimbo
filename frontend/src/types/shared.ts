@@ -1,0 +1,1 @@
+export type FilterRange = 'none' | 'week' | 'month'

@@ -1,0 +1,23 @@
+version: "3.4"
+
+services:
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_USER: "slimbo-sa"
+      POSTGRES_PASSWORD: "6285b275805a115bd326acddc714b865de72a51e8b21df3cbbcbfe048b9c5e2e"
+      POSTGRES_DB: "slimbo-db"
+
+  slimbo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:80"
+    restart: on-failure
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      CONNECTIONSTRINGS:POSTGRES: "Host=postgres;Database=slimbo-db;Username=slimbo-sa;Password=6285b275805a115bd326acddc714b865de72a51e8b21df3cbbcbfe048b9c5e2e"
