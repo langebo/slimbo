@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: slimbo
+  name: slimbo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: slimbo
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        app: slimbo
+    spec:
+      containers:
+        - env:
+            - name: CONNECTIONSTRINGS__POSTGRES
+              valueFrom:
+                secretKeyRef:
+                  name: db
+                  key: connectionString
+          image: blangr/slimbo:latest
+          imagePullPolicy: Always
+          name: slimbo
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 100m
+              memory: 1Gi
+            limits:
+              cpu: 250m
+              memory: 2Gi
+      restartPolicy: Always
+status: {}
