@@ -1,8 +1,8 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-alpine AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:latest AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:latest AS build
 WORKDIR /src
 COPY ["backend/Slimbo.csproj", "backend/"]
 RUN dotnet restore "backend/Slimbo.csproj"

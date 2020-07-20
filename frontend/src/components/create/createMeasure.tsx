@@ -45,7 +45,7 @@ const CreateMeasure: React.FC<ICreateMeasureProps> = ({
     <Container>
       <Label required={true}>Weight</Label>
       <SpinButton
-        inputProps={{ inputMode: 'numeric' }}
+        inputProps={{ inputMode: 'decimal' }}
         value={weight.toString()}
         min={0.0}
         max={180.0}
